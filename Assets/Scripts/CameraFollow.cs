@@ -61,4 +61,9 @@ public class CameraFollow : MonoBehaviour
         newCameraTarget = _target;
         SetCameraTarget(newCameraTarget);
     }
+
+    public Transform CameraTarget
+    {
+        get { return cameraTarget; }
+    }
 }
