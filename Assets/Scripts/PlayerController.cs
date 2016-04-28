@@ -22,27 +22,25 @@ public class PlayerController : MonoBehaviour
     {
         float mouseX = Input.GetAxisRaw("Mouse X");
 
-        if (myMotor.IsGrounded())
-        {
+            float yVel = moveDir.y;
             float horInput = Input.GetAxisRaw("Horizontal");
             float vertInput = Input.GetAxisRaw("Vertical");
 
             moveDir = new Vector3(horInput, 0, vertInput);
             moveDir *= moveSpeed;
 
+            moveDir += (Vector3.up * yVel);
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 moveDir.y = jumpForce;
             }
-        }
-        else
-        {
-            moveDir.y += gravity * Time.deltaTime;
-        }
-       
-        moveDir = Vector3.ClampMagnitude(moveDir, moveSpeed);
 
-        myMotor.Rotate(new Vector3(0, mouseX * rotateSpeed, 0));
-        myMotor.Move(transform.rotation * moveDir);
-    }  
+            moveDir.y += gravity * Time.deltaTime;
+
+            moveDir = Vector3.ClampMagnitude(moveDir, moveSpeed);
+
+            myMotor.Rotate(new Vector3(0, mouseX * rotateSpeed, 0));
+            myMotor.Move(transform.rotation * moveDir);
+    }
 }
