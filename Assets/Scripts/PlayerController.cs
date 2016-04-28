@@ -5,10 +5,14 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
+    public float smoothMovement;
     public float rotateSpeed;
+    public float smoothRotation;
     public float jumpForce;
-
+    
     private Vector3 moveDir;
+    private float horInput, vertInput, mouseX;
+    private float yRotVel, xMoveVel, zMoveVel; 
 
     private PlayerMotor myMotor;
 
@@ -19,9 +23,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X");
-        float horInput = Input.GetAxisRaw("Horizontal");
-        float vertInput = Input.GetAxisRaw("Vertical");
+        mouseX = Mathf.SmoothDamp(mouseX, Input.GetAxisRaw("Mouse X"), ref yRotVel, smoothRotation);
+
+        horInput = Mathf.SmoothDamp(horInput, Input.GetAxisRaw("Horizontal"), ref xMoveVel, smoothMovement);
+        vertInput = Mathf.SmoothDamp(vertInput, Input.GetAxisRaw("Vertical"), ref zMoveVel, smoothMovement);
 
         moveDir = new Vector3(horInput, 0, vertInput);
         moveDir = transform.TransformDirection(moveDir);
