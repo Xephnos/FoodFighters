@@ -21,6 +21,12 @@ public class PlayerController : MonoBehaviour
         myMotor = GetComponent<PlayerMotor>();
     }
 
+    void Start()
+    {
+        horInput = 0;
+        vertInput = 0;
+    }
+
     void Update()
     {
         mouseX = Mathf.SmoothDamp(mouseX, Input.GetAxisRaw("Mouse X"), ref yRotVel, smoothRotation);
@@ -28,11 +34,6 @@ public class PlayerController : MonoBehaviour
 
         horInput = Mathf.SmoothDamp(horInput, Input.GetAxisRaw("Horizontal"), ref xMoveVel, smoothMovement);
         vertInput = Mathf.SmoothDamp(vertInput, Input.GetAxisRaw("Vertical"), ref zMoveVel, smoothMovement);
-
-        float yVel = moveDir.y;
-        float horInput = Input.GetAxisRaw("Horizontal");
-        float vertInput = Input.GetAxisRaw("Vertical");
-
 
         moveDir = new Vector3(horInput, 0, vertInput);
         moveDir = transform.TransformDirection(moveDir);
@@ -42,8 +43,6 @@ public class PlayerController : MonoBehaviour
 
         if (myMotor.IsGrounded())
         {
-            moveDir += (Vector3.up * yVel);
-
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 myMotor.Jump(jumpForce);
