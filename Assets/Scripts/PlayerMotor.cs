@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMotor : MonoBehaviour
 {
     public float smoothMovement;
 
     private float distToGround;
 
-    private CharacterController charController;
+    private Rigidbody myRigidbody;
     private Collider myCollider;
 
     void Awake()
     {
-        charController = GetComponent<CharacterController>();
+        myRigidbody = GetComponent<Rigidbody>();
         myCollider = GetComponent<Collider>();
     }
 
@@ -24,7 +24,7 @@ public class PlayerMotor : MonoBehaviour
 
     public void Move(Vector3 movement)
     {
-        charController.Move(movement * Time.deltaTime);
+        transform.position += movement * Time.deltaTime;
     }
 
     public void Rotate(Vector3 rotation)
@@ -32,14 +32,13 @@ public class PlayerMotor : MonoBehaviour
         transform.rotation *= Quaternion.EulerAngles(rotation * Time.deltaTime);
     }
 
-    public void Jump()
+    public void Jump(float _jumpForce)
     {
-
+        myRigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
 
     public bool IsGrounded()
     {
-        //return charController.isGrounded;
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
 }

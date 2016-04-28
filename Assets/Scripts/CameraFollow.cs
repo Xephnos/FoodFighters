@@ -5,6 +5,7 @@ public class CameraFollow : MonoBehaviour
 {
     public float moveSpeed;
 
+    private Vector3 currentVelocity;
     private Transform cameraTarget;
     private Transform newCameraTarget;
     private bool autoTarget;
@@ -46,7 +47,7 @@ public class CameraFollow : MonoBehaviour
 
     void Follow(Transform _target)
     {
-        transform.position = Vector3.Lerp(transform.position, _target.transform.position, moveSpeed * Time.deltaTime);
+        transform.position = Vector3.Slerp(transform.position, _target.position, moveSpeed * Time.deltaTime);
         transform.rotation = _target.rotation;
     }
 

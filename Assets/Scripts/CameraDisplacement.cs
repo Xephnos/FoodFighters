@@ -12,17 +12,15 @@ public class CameraDisplacement : MonoBehaviour
 
     private Vector3 currentVelocity;
 
-    private CameraFollow camFollow;
     private Transform cameraRaycastOrigin;
 
     void Awake()
     {
-        camFollow = transform.parent.GetComponent<CameraFollow>();
+        cameraRaycastOrigin = GameObject.FindGameObjectWithTag("CameraRaycastOrigin").transform;
     }
 
 	void Start ()
     {
-        cameraRaycastOrigin = GameObject.FindGameObjectWithTag("CameraRaycastOrigin").transform;
         UpdateCameraPosition(cameraDisplacement);
 	}
 	
