@@ -5,7 +5,6 @@ public class CameraFollow : MonoBehaviour
 {
     public float moveSpeed;
 
-    private Vector3 currentVelocity;
     private Transform cameraTarget;
     private Transform newCameraTarget;
     private bool autoTarget;

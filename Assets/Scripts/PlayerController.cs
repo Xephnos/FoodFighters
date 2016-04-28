@@ -39,8 +39,7 @@ public class PlayerController : MonoBehaviour
         moveDir = transform.TransformDirection(moveDir);
         moveDir *= moveSpeed;
         moveDir = Vector3.ClampMagnitude(moveDir, moveSpeed);
-
-
+        
         if (myMotor.IsGrounded())
         {
             if (Input.GetKeyDown(KeyCode.Space))
