@@ -3,31 +3,19 @@ using System.Collections;
 
 public class InputManager : MonoBehaviour
 {
-    private bool cursorLocked;
+    private MenuManager menuMngr;
 
-	void Start ()
+    void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        cursorLocked = true;
-	}
+        menuMngr = GameObject.FindGameObjectWithTag("MenuManager").GetComponent<MenuManager>();
+    }
 	
 	void Update ()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (cursorLocked)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                cursorLocked = false;
-            }
-            else 
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                cursorLocked = true;
-            }
+            print("Hello");
+            menuMngr.OpenCloseMenu();
         }
 	}
 }
