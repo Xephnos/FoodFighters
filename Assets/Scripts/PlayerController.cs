@@ -43,5 +43,5 @@ public class PlayerController : MonoBehaviour
 
         myMotor.Rotate(new Vector3(0, mouseX * rotateSpeed, 0));
         myMotor.Move(moveDir);
-    }  
+    }
 }
