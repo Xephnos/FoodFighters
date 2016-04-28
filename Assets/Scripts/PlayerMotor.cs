@@ -4,9 +4,9 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMotor : MonoBehaviour
 {
-    private float distToGround;
+    public float smoothMovement;
 
-    private Vector3 currentVelocity;
+    private float distToGround;
 
     private Rigidbody myRigidbody;
     private Collider myCollider;
