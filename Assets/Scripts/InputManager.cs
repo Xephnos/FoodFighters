@@ -14,8 +14,7 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            print("Hello");
-            menuMngr.OpenCloseMenu();
+            menuMngr.OpenCloseGameMenu();
         }
 	}
 }

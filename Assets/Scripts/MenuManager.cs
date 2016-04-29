@@ -4,8 +4,14 @@ using System.Collections;
 public class MenuManager : MonoBehaviour
 {
     private GameObject gameMenu;
+    private GameObject settingsMenu;
 
     void Awake()
+    {
+        DeclareMenus();
+    }
+
+    private void DeclareMenus()
     {
         if (gameMenu == null)
         {
@@ -20,11 +26,24 @@ public class MenuManager : MonoBehaviour
                 gameMenu.SetActive(false);
             }
         }
+
+        if (settingsMenu == null)
+        {
+            settingsMenu = GameObject.FindGameObjectWithTag("SettingsMenu");
+
+            if (settingsMenu == null)
+            {
+                settingsMenu = null;
+            }
+            else
+            {
+                settingsMenu.SetActive(false);
+            }
+        }
     }
 
-    public void OpenCloseMenu()
+    public void OpenCloseGameMenu()
     {
-        print("World");
         if (gameMenu != null)
         {
             if (gameMenu.activeInHierarchy)
@@ -34,6 +53,21 @@ public class MenuManager : MonoBehaviour
             else
             {
                 gameMenu.SetActive(true);
+            }
+        }
+    }
+
+    public void OpenCloseSettingsMenu()
+    {
+        if (settingsMenu != null)
+        {
+            if (settingsMenu.activeInHierarchy)
+            {
+                settingsMenu.SetActive(false);
+            }
+            else
+            {
+                settingsMenu.SetActive(true);
             }
         }
     }
