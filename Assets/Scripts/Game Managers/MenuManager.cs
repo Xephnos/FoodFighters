@@ -6,8 +6,11 @@ public class MenuManager : MonoBehaviour
     private GameObject gameMenu;
     private GameObject settingsMenu;
 
+    private GameManager gMngr;
+
     void Awake()
     {
+        gMngr = gameObject.transform.parent.GetComponent<GameManager>();
         DeclareMenus();
     }
 

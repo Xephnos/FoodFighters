@@ -3,18 +3,18 @@ using System.Collections;
 
 public class InputManager : MonoBehaviour
 {
-    private MenuManager menuMngr;
+    private GameManager gMngr;
 
     void Awake()
     {
-        menuMngr = GameObject.FindGameObjectWithTag("MenuManager").GetComponent<MenuManager>();
+        gMngr = gameObject.transform.parent.GetComponent<GameManager>();
     }
 	
 	void Update ()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            menuMngr.OpenCloseGameMenu();
+            gMngr.menuManager.OpenCloseGameMenu();
         }
 	}
 }
