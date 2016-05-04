@@ -5,7 +5,6 @@ public class MenuManager : MonoBehaviour
 {
     private GameObject gameMenu;
     private GameObject settingsMenu;
-
     private GameManager gMngr;
 
     void Awake()
@@ -52,10 +51,12 @@ public class MenuManager : MonoBehaviour
             if (gameMenu.activeInHierarchy)
             {
                 gameMenu.SetActive(false);
+                gMngr.gameState = GameState.Play;
             }
             else
             {
                 gameMenu.SetActive(true);
+                gMngr.gameState = GameState.GameMenu;
             }
         }
     }

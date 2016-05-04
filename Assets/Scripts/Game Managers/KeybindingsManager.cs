@@ -9,25 +9,19 @@ public class KeybindingsManager : MonoBehaviour
 
     public Text up, left, down, right, jump;
 
-    private GameManager gMngr;
     private GameObject keyPressed;
-
-    void Awake()
-    {
-        gMngr = gameObject.transform.parent.GetComponent<GameManager>();
-    }
 
     void Start()
     {
-        keybindings.Add("Up", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Up", "W")));
+        keybindings.Add("Forward", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Forward", "W")));
         keybindings.Add("Left", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Left", "A")));
-        keybindings.Add("Down", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Down", "S")));
+        keybindings.Add("Backward", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Backward", "S")));
         keybindings.Add("Right", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Right", "D")));
         keybindings.Add("Jump", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump", "Space")));
 
-        up.text = keybindings["Up"].ToString();
+        up.text = keybindings["Forward"].ToString();
         left.text = keybindings["Left"].ToString();
-        down.text = keybindings["Down"].ToString();
+        down.text = keybindings["Backward"].ToString();
         right.text = keybindings["Right"].ToString();
         jump.text = keybindings["Jump"].ToString();
     }
@@ -64,15 +58,15 @@ public class KeybindingsManager : MonoBehaviour
 
     public void ResetKeybindings()
     {
-        keybindings["Up"] = KeyCode.W;
+        keybindings["Forward"] = KeyCode.W;
         keybindings["Left"] = KeyCode.A;
-        keybindings["Down"] = KeyCode.S;
+        keybindings["Backward"] = KeyCode.S;
         keybindings["Right"] = KeyCode.D;
         keybindings["Jump"] = KeyCode.Space;
 
-        up.text = keybindings["Up"].ToString();
+        up.text = keybindings["Forward"].ToString();
         left.text = keybindings["Left"].ToString();
-        down.text = keybindings["Down"].ToString();
+        down.text = keybindings["Backward"].ToString();
         right.text = keybindings["Right"].ToString();
         jump.text = keybindings["Jump"].ToString();
     }

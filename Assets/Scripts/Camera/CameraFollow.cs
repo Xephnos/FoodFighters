@@ -46,7 +46,7 @@ public class CameraFollow : MonoBehaviour
 
     void Follow(Transform _target)
     {
-        transform.position = Vector3.Slerp(transform.position, _target.position, moveSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, _target.position, moveSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(new Vector3(transform.eulerAngles.x, _target.rotation.eulerAngles.y, transform.eulerAngles.z));
     }
 
