@@ -1,0 +1,33 @@
+> Energy bar (health)
+> Scoreboard
+> Game modes
+>> Free-For-All
+>> TDM
+> Menu Revamp
+> Jump function
+> Shooting
+>> Hit markers
+>> Hit score
+> Passives
+
+----------------------------------------------------
+Geek Squad
+>Technology
+
+Preps
+>Flirting (taunt)
+>>Queen Bee
+>>Prepula
+
+Jocks
+>Tanky
+>Melee
+
+Emo/Goth
+>Dark magic
+
+Band Geeks
+>Healing
+>Buffs
+>Debuffs
+----------------------------------------------------
