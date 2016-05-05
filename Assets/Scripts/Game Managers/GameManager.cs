@@ -11,21 +11,21 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public InputManager inputManager;
-    [HideInInspector] public MenuManager menuManager;
+    [HideInInspector] public UIManager uiManager;
     [HideInInspector] public LevelManager levelManager;
     [HideInInspector] public KeybindingsManager keybindingsManager;
 
-    public GameState gameState;
+    [HideInInspector] public GameObject player;
+    [HideInInspector] public PlayerController playerCont;
+    [HideInInspector] public GameObject mainCam;
+    [HideInInspector] public CameraController camCont;
 
-    public GameObject player;
-    public PlayerController playerCont;
-    public GameObject mainCam;
-    public CameraController camCont;
+    public GameState gameState;
 
     void Awake()
     {
         inputManager = gameObject.transform.FindChild("InputManager").GetComponent<InputManager>();
-        menuManager = gameObject.transform.FindChild("MenuManager").GetComponent<MenuManager>();
+        uiManager = gameObject.transform.FindChild("UIManager").GetComponent<UIManager>();
         levelManager = gameObject.transform.FindChild("LevelManager").GetComponent<LevelManager>();
         keybindingsManager = gameObject.transform.FindChild("KeybindingsManager").GetComponent<KeybindingsManager>();
 
@@ -38,35 +38,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         if (gameState == GameState.Play)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-
+            LockCursor();
             inputManager.ControlPlayStateInput();
         }
         else if (gameState == GameState.GameMenu)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            UnlockCursor();
         }
         else if (gameState == GameState.MainMenu)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            UnlockCursor();
         }
-    }
-
-    void UpdateCursorState()
-    {
-        
     }
 
     void LateUpdate()
@@ -75,5 +61,17 @@ public class GameManager : MonoBehaviour
         {
             inputManager.ControlLatePlayStateInput();
         }
+    }
+
+    void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

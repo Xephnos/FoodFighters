@@ -24,41 +24,48 @@ public class InputManager : MonoBehaviour
     {
         if (gMngr.gameState == GameState.Play || gMngr.gameState == GameState.GameMenu)
         {
+            // Controls opening and closing the In-Game Menu.
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                gMngr.menuManager.OpenCloseGameMenu();
+                gMngr.uiManager.EnableDisableGameMenu();
+                gMngr.uiManager.EnableDisablePlayerUI();
+
+                if (gMngr.uiManager.IsSettingsMenuActive())
+                {
+                    gMngr.uiManager.EnableDisableSettingsMenu();
+                }
             }
         }
     }
 
-    // Player Movement Input
-    void PlayerMovement()
+    // Player Input.
+    void PlayerInput()
     {
         if ((Input.GetKey(keys["Forward"]) || Input.GetKey(keys["Left"]) || Input.GetKey(keys["Backward"]) || Input.GetKey(keys["Right"])))
         {
             if (Input.GetKey(keys["Forward"]))
             {
-                movement.z = Mathf.Lerp(movement.z, Vector3.forward.z, gMngr.playerCont.smoothMoveZ * Time.deltaTime);
+                movement.z = Vector3.forward.z;
             }
             else if (Input.GetKey(keys["Backward"]))
             {
-                movement.z = Mathf.Lerp(movement.z, -Vector3.forward.z, gMngr.playerCont.smoothMoveZ * Time.deltaTime);
+                movement.z = -Vector3.forward.z;
             }
             else
             {
-                movement.z = Mathf.Lerp(movement.z, 0, gMngr.playerCont.smoothMoveZ * Time.deltaTime);
+                movement.z = 0;
             }
             if (Input.GetKey(keys["Left"]))
             {
-                movement.x = Mathf.Lerp(movement.x, -Vector3.right.x, gMngr.playerCont. smoothMoveX * Time.deltaTime);
+                movement.x = -Vector3.right.x;
             }
             else if (Input.GetKey(keys["Right"]))
             {
-                movement.x = Mathf.Lerp(movement.x, Vector3.right.x, gMngr.playerCont.smoothMoveX * Time.deltaTime);
+                movement.x = Vector3.right.x;
             }
             else
             {
-                movement.x = Mathf.Lerp(movement.x, 0, gMngr.playerCont.smoothMoveX * Time.deltaTime);
+                movement.x = 0;
             }
 
             gMngr.playerCont.Move(movement.normalized);
@@ -76,7 +83,8 @@ public class InputManager : MonoBehaviour
         gMngr.playerCont.Rotate(Input.GetAxisRaw("Mouse X"));
     }
 
-    void CameraMovement()
+    // Camera Input.
+    void CameraInput()
     {
         gMngr.camCont.LookUpAndDown(Input.GetAxisRaw("Mouse Y"));
     }
@@ -84,13 +92,15 @@ public class InputManager : MonoBehaviour
     // PUBLIC METHODS
 
     // Controls all input while the game is in Play State.
+    // Uses the Update function.
     public void ControlPlayStateInput()
     {
-        PlayerMovement();
+        PlayerInput();
     }
 
+    // Uses the LateUpdate function.
     public void ControlLatePlayStateInput()
     {
-        CameraMovement();
+        CameraInput();
     }
 }

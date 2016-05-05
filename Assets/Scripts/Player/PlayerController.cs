@@ -1,24 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
-    public float smoothMoveX, smoothMoveZ;
+    public float moveSpeedDelay;
+    public float moveDelay;
     public float rotSensitivity;
     public float smoothRotation;
     public float jumpForce;
     
     private float distToGround;
     private float mouseX;
+    private float moveSpeedLimit;
+    private Vector3 movement;
+    private Vector3 moveVelocity;
 
-    private CharacterController myCharCont;
+    private Rigidbody myRigidbody;
     private Collider myCollider;
 
     void Awake()
     {
-        myCharCont = GetComponent<CharacterController>();
+        myRigidbody = GetComponent<Rigidbody>();
         myCollider = GetComponent<Collider>();
     }
 
@@ -29,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private void MakeMeJump(float _jumpForce)
     {
-        
+        myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, jumpForce, myRigidbody.velocity.z);
     }
 
     public void Jump()
@@ -40,13 +44,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Move(Vector3 _movement)
+    public void Move(Vector3 _targetMovement)
     {
-        _movement = transform.TransformDirection(_movement);
-        _movement *= moveSpeed;
-        _movement = Vector3.ClampMagnitude(_movement, moveSpeed);
+        if (!IsGrounded())
+        {
+            moveSpeedLimit = Mathf.Lerp(moveSpeedLimit, (moveSpeed / 2f), moveSpeedDelay * Time.deltaTime);
+        }
+        else
+        {
+            moveSpeedLimit = moveSpeed;
+        }
 
-        myCharCont.Move(_movement * Time.deltaTime);
+        _targetMovement *= moveSpeedLimit;
+        _targetMovement = Vector3.ClampMagnitude(_targetMovement, moveSpeedLimit);
+
+        movement = Vector3.SmoothDamp(movement, _targetMovement, ref moveVelocity, moveDelay);
+
+        transform.Translate(movement * Time.deltaTime);
     }
 
     public void Rotate(float _mouseX)

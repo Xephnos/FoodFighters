@@ -7,7 +7,7 @@ public class KeybindingsManager : MonoBehaviour
 {
     public Dictionary<string, KeyCode> keybindings = new Dictionary<string, KeyCode>();
 
-    public Text up, left, down, right, jump;
+    public Text forward, left, backward, right, jump;
 
     private GameObject keyPressed;
 
@@ -19,9 +19,9 @@ public class KeybindingsManager : MonoBehaviour
         keybindings.Add("Right", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Right", "D")));
         keybindings.Add("Jump", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump", "Space")));
 
-        up.text = keybindings["Forward"].ToString();
+        forward.text = keybindings["Forward"].ToString();
         left.text = keybindings["Left"].ToString();
-        down.text = keybindings["Backward"].ToString();
+        backward.text = keybindings["Backward"].ToString();
         right.text = keybindings["Right"].ToString();
         jump.text = keybindings["Jump"].ToString();
     }
@@ -64,9 +64,9 @@ public class KeybindingsManager : MonoBehaviour
         keybindings["Right"] = KeyCode.D;
         keybindings["Jump"] = KeyCode.Space;
 
-        up.text = keybindings["Forward"].ToString();
+        forward.text = keybindings["Forward"].ToString();
         left.text = keybindings["Left"].ToString();
-        down.text = keybindings["Backward"].ToString();
+        backward.text = keybindings["Backward"].ToString();
         right.text = keybindings["Right"].ToString();
         jump.text = keybindings["Jump"].ToString();
     }
