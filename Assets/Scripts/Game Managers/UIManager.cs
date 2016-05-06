@@ -14,18 +14,12 @@ public class UIManager : MonoBehaviour
     {
         gMngr = gameObject.transform.parent.GetComponent<GameManager>();
         menus = GameObject.FindGameObjectWithTag("Menus");
-        mainMenu = menus.transform.FindChild("MainMenu").gameObject;
+        mainMenu = menus.transform.FindChild("MainMenuUI").gameObject;
         gameMenu = menus.transform.FindChild("GameMenu").gameObject;
         settingsMenu = menus.transform.FindChild("SettingsMenu").gameObject;
+        playerUI = menus.transform.FindChild("PlayerUI").gameObject;
 
-        if (gMngr.gameState == GameState.Play)
-        {
-            playerUI = GameObject.FindGameObjectWithTag("PlayerUI");
-        }
-        else
-        {
-            playerUI = null;
-        }
+
     }
 
     void Start()
@@ -40,6 +34,7 @@ public class UIManager : MonoBehaviour
         {
             gameMenu.SetActive(false);
             settingsMenu.SetActive(false);
+            playerUI.SetActive(false);
         }
     }
 

@@ -3,9 +3,17 @@ using System.Collections;
 
 public enum GameState
 {
+    SplashScreen,
     MainMenu,
     GameMenu,
     Play
+}
+
+public enum GameMode
+{
+    None,
+    CaptureTheTest,
+    FoodWars
 }
 
 public class GameManager : MonoBehaviour
@@ -14,6 +22,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public UIManager uiManager;
     [HideInInspector] public LevelManager levelManager;
     [HideInInspector] public KeybindingsManager keybindingsManager;
+    [HideInInspector] public TimeManager timeManager;
 
     [HideInInspector] public GameObject player;
     [HideInInspector] public PlayerController playerCont;
@@ -21,6 +30,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public CameraController camCont;
 
     public GameState gameState;
+    public GameMode gameMode;
 
     void Awake()
     {
@@ -28,6 +38,7 @@ public class GameManager : MonoBehaviour
         uiManager = gameObject.transform.FindChild("UIManager").GetComponent<UIManager>();
         levelManager = gameObject.transform.FindChild("LevelManager").GetComponent<LevelManager>();
         keybindingsManager = gameObject.transform.FindChild("KeybindingsManager").GetComponent<KeybindingsManager>();
+        timeManager = gameObject.transform.FindChild("TimeManager").GetComponent<TimeManager>();
 
         if (gameState == GameState.Play)
         {
